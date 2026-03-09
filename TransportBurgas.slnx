@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Transport.ConsoleUI/Transport.ConsoleUI.csproj" />
+  <Project Path="Transport.Data/Transport.Data.csproj" />
+  <Project Path="TransportServices/Transport.Services.csproj" />
+</Solution>
