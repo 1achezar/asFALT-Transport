@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 using Transport.Data;
 using Transport.Data.Models;
@@ -52,6 +53,40 @@ namespace Transport.Services
                 .ToList();
         }
 
+        private int GetStopOffset(string lineNumber  , string stopName)
+        {
+            return _context.RouteStops
+                .Where(rs => rs.BusLine.Number == lineNumber && rs.BusStop.Name == stopName)
+                .Select(rs => rs.MinutesFromStart)
+                .First();
+        }
+        
+        private IEnumerable<TimeSpan> GetSchedulesForLine(string lineNumber)
+        {
+            return _context.Schedules
+                    .Where(s => s.BusLine.Number == lineNumber)
+                    .Select(s => s.DepartureTime)
+                    .ToList();
+        }
+
+        private List<DepartureInfo>  FilterDepartures(IEnumerable<TimeSpan> schedules , int offset , string lineNumber , TimeSpan time)
+        {
+            var results = new List<DepartureInfo>();
+            foreach (var departure in schedules)
+            {
+                var actualTime = departure + TimeSpan.FromMinutes(offset);
+                if (actualTime >= time)
+                {
+                    results.Add(new DepartureInfo
+                    {
+                        BusLineNumber = lineNumber,
+                        DepartureFromStop = actualTime
+                    });
+                }
+            }
+
+            return results;
+        }
         public IEnumerable<DepartureInfo> GetNextDepartures(string fromStop, string toStop, TimeSpan time, int count)
         {
             var routes = FindRoutes(fromStop, toStop);
@@ -59,28 +94,9 @@ namespace Transport.Services
 
             foreach (var route in routes)
             {
-                var offset = _context.RouteStops
-                    .Where(rs => rs.BusLine.Number == route.BusLineNumber && rs.BusStop.Name == fromStop)
-                    .Select(rs => rs.MinutesFromStart)
-                    .First();
-
-                var schedules = _context.Schedules
-                    .Where(s => s.BusLine.Number == route.BusLineNumber)
-                    .Select(s => s.DepartureTime)
-                    .ToList();
-
-                foreach (var departure in schedules)
-                {
-                    var actualTime = departure + TimeSpan.FromMinutes(offset);
-                    if (actualTime >= time)
-                    {
-                        results.Add(new DepartureInfo
-                        {
-                            BusLineNumber = route.BusLineNumber,
-                            DepartureFromStop = actualTime
-                        });
-                    }
-                }
+                var offset = GetStopOffset(route.BusLineNumber, fromStop);
+                var schedules = GetSchedulesForLine(route.BusLineNumber);
+                results.AddRange(FilterDepartures(schedules, offset, route.BusLineNumber, time));
             }
 
             return results.OrderBy(d => d.DepartureFromStop).Take(count);
