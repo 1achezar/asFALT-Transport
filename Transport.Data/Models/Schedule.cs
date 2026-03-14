@@ -11,5 +11,6 @@ namespace Transport.Data.Models
 
         public int BusLineId { get; set; }
         public BusLine BusLine { get; set; }
+        public RouteDirection Direction { get; set; }
     }
 }

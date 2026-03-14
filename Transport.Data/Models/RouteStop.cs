@@ -16,5 +16,6 @@ namespace Transport.Data.Models
 
         public int StopOrder { get; set; } 
         public int MinutesFromStart { get; set; }
+        public RouteDirection Direction { get; set; }
     }
 }
