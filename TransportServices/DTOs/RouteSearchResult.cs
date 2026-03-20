@@ -9,5 +9,6 @@ namespace Transport.Services.DTOs
     {
         public string BusLineNumber { get; set; }
         public int TravelMinutes { get; set; }
+        public RouteDirection Direction { get; set; }
     }
 }

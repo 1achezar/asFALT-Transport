@@ -42,29 +42,29 @@ namespace Transport.Services
             var toEntries = _context.RouteStops.Where(rs => rs.BusStop.Name == toStop);
 
             return fromEntries
-                .Join(toEntries, from => from.BusLineId, to => to.BusLineId, (from, to) => new { from, to })
+                .Join(toEntries, from => new { from.BusLineId , from.Direction}, to => new { to.BusLineId, to.Direction }, (from, to) => new { from, to })
                 .Where(pair => pair.from.StopOrder < pair.to.StopOrder)
                 .Select(pair => new RouteSearchResult
                 {
                     BusLineNumber = pair.from.BusLine.Number,
-                    TravelMinutes = pair.to.MinutesFromStart - pair.from.MinutesFromStart
-
+                    TravelMinutes = pair.to.MinutesFromStart - pair.from.MinutesFromStart,
+                    Direction = pair.from.Direction
                 })
                 .ToList();
         }
 
-        private int GetStopOffset(string lineNumber  , string stopName)
+        private int GetStopOffset(string lineNumber  , string stopName , RouteDirection direction)
         {
             return _context.RouteStops
-                .Where(rs => rs.BusLine.Number == lineNumber && rs.BusStop.Name == stopName)
+                .Where(rs => rs.BusLine.Number == lineNumber && rs.BusStop.Name == stopName && rs.Direction == direction)
                 .Select(rs => rs.MinutesFromStart)
                 .First();
         }
         
-        private IEnumerable<TimeSpan> GetSchedulesForLine(string lineNumber)
+        private IEnumerable<TimeSpan> GetSchedulesForLine(string lineNumber , RouteDirection direction)
         {
             return _context.Schedules
-                    .Where(s => s.BusLine.Number == lineNumber)
+                    .Where(s => s.BusLine.Number == lineNumber && s.Direction == direction)
                     .Select(s => s.DepartureTime)
                     .ToList();
         }
@@ -94,8 +94,8 @@ namespace Transport.Services
 
             foreach (var route in routes)
             {
-                var offset = GetStopOffset(route.BusLineNumber, fromStop);
-                var schedules = GetSchedulesForLine(route.BusLineNumber);
+                var offset = GetStopOffset(route.BusLineNumber, fromStop , route.Direction);
+                var schedules = GetSchedulesForLine(route.BusLineNumber, route.Direction);
                 results.AddRange(FilterDepartures(schedules, offset, route.BusLineNumber, time));
             }
 
