@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Transport.Data.Models
+namespace Transport.Web.Models
 {
     public class BusLine
     {
