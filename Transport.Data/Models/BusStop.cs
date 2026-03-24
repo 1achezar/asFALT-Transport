@@ -1,4 +1,4 @@
-﻿namespace Transport.Web.Models
+﻿namespace Transport.Data.Models
 {
     public class BusStop
     {

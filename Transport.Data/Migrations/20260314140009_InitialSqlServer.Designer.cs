@@ -5,15 +5,15 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Transport.Web.Data;
+using Transport.Data;
 
 #nullable disable
 
-namespace Transport.Web.Migrations
+namespace Transport.Data.Migrations
 {
     [DbContext(typeof(TransportDbContext))]
-    [Migration("20260324145515_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260314140009_InitialSqlServer")]
+    partial class InitialSqlServer
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,209 +25,7 @@ namespace Transport.Web.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
-
-                    b.ToTable("AspNetRoles", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RoleId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetRoleClaims", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AspNetUserClaims", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
-                {
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
-
-                    b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
-
-                    b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("LoginProvider", "ProviderKey");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AspNetUserLogins", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetUserRoles", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
-
-                    b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("UserId", "LoginProvider", "Name");
-
-                    b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("Transport.Web.Models.BusLine", b =>
+            modelBuilder.Entity("Transport.Data.Models.BusLine", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -286,7 +84,7 @@ namespace Transport.Web.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Transport.Web.Models.BusStop", b =>
+            modelBuilder.Entity("Transport.Data.Models.BusStop", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -721,7 +519,7 @@ namespace Transport.Web.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Transport.Web.Models.RouteStop", b =>
+            modelBuilder.Entity("Transport.Data.Models.RouteStop", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -3491,7 +3289,7 @@ namespace Transport.Web.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Transport.Web.Models.Schedule", b =>
+            modelBuilder.Entity("Transport.Data.Models.Schedule", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -4470,3103 +4268,560 @@ namespace Transport.Web.Migrations
                         new
                         {
                             Id = 137,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 5, 0, 0, 0),
-                            Direction = 0
+                            BusLineId = 7,
+                            DepartureTime = new TimeSpan(0, 6, 0, 0, 0),
+                            Direction = 3
                         },
                         new
                         {
                             Id = 138,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 5, 30, 0, 0),
-                            Direction = 0
+                            BusLineId = 7,
+                            DepartureTime = new TimeSpan(0, 6, 30, 0, 0),
+                            Direction = 3
                         },
                         new
                         {
                             Id = 139,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 6, 0, 0, 0),
-                            Direction = 0
+                            BusLineId = 7,
+                            DepartureTime = new TimeSpan(0, 7, 0, 0, 0),
+                            Direction = 3
                         },
                         new
                         {
                             Id = 140,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 6, 16, 0, 0),
-                            Direction = 0
+                            BusLineId = 7,
+                            DepartureTime = new TimeSpan(0, 7, 30, 0, 0),
+                            Direction = 3
                         },
                         new
                         {
                             Id = 141,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 6, 34, 0, 0),
-                            Direction = 0
+                            BusLineId = 7,
+                            DepartureTime = new TimeSpan(0, 8, 0, 0, 0),
+                            Direction = 3
                         },
                         new
                         {
                             Id = 142,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 6, 53, 0, 0),
-                            Direction = 0
+                            BusLineId = 7,
+                            DepartureTime = new TimeSpan(0, 8, 30, 0, 0),
+                            Direction = 3
                         },
                         new
                         {
                             Id = 143,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 7, 7, 0, 0),
-                            Direction = 0
+                            BusLineId = 7,
+                            DepartureTime = new TimeSpan(0, 9, 0, 0, 0),
+                            Direction = 3
                         },
                         new
                         {
                             Id = 144,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 7, 23, 0, 0),
-                            Direction = 0
+                            BusLineId = 7,
+                            DepartureTime = new TimeSpan(0, 9, 30, 0, 0),
+                            Direction = 3
                         },
                         new
                         {
                             Id = 145,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 7, 38, 0, 0),
-                            Direction = 0
+                            BusLineId = 7,
+                            DepartureTime = new TimeSpan(0, 10, 0, 0, 0),
+                            Direction = 3
                         },
                         new
                         {
                             Id = 146,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 7, 53, 0, 0),
-                            Direction = 0
+                            BusLineId = 7,
+                            DepartureTime = new TimeSpan(0, 10, 30, 0, 0),
+                            Direction = 3
                         },
                         new
                         {
                             Id = 147,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 8, 8, 0, 0),
-                            Direction = 0
+                            BusLineId = 7,
+                            DepartureTime = new TimeSpan(0, 11, 0, 0, 0),
+                            Direction = 3
                         },
                         new
                         {
                             Id = 148,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 8, 23, 0, 0),
-                            Direction = 0
+                            BusLineId = 7,
+                            DepartureTime = new TimeSpan(0, 11, 30, 0, 0),
+                            Direction = 3
                         },
                         new
                         {
                             Id = 149,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 8, 38, 0, 0),
-                            Direction = 0
+                            BusLineId = 7,
+                            DepartureTime = new TimeSpan(0, 12, 0, 0, 0),
+                            Direction = 3
                         },
                         new
                         {
                             Id = 150,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 8, 53, 0, 0),
-                            Direction = 0
+                            BusLineId = 7,
+                            DepartureTime = new TimeSpan(0, 12, 30, 0, 0),
+                            Direction = 3
                         },
                         new
                         {
                             Id = 151,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 9, 10, 0, 0),
-                            Direction = 0
+                            BusLineId = 7,
+                            DepartureTime = new TimeSpan(0, 13, 0, 0, 0),
+                            Direction = 3
                         },
                         new
                         {
                             Id = 152,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 9, 25, 0, 0),
-                            Direction = 0
+                            BusLineId = 7,
+                            DepartureTime = new TimeSpan(0, 13, 30, 0, 0),
+                            Direction = 3
                         },
                         new
                         {
                             Id = 153,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 9, 50, 0, 0),
-                            Direction = 0
+                            BusLineId = 7,
+                            DepartureTime = new TimeSpan(0, 14, 0, 0, 0),
+                            Direction = 3
                         },
                         new
                         {
                             Id = 154,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 10, 10, 0, 0),
-                            Direction = 0
+                            BusLineId = 7,
+                            DepartureTime = new TimeSpan(0, 14, 30, 0, 0),
+                            Direction = 3
                         },
                         new
                         {
                             Id = 155,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 10, 30, 0, 0),
-                            Direction = 0
+                            BusLineId = 7,
+                            DepartureTime = new TimeSpan(0, 15, 0, 0, 0),
+                            Direction = 3
                         },
                         new
                         {
                             Id = 156,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 10, 50, 0, 0),
-                            Direction = 0
+                            BusLineId = 7,
+                            DepartureTime = new TimeSpan(0, 15, 30, 0, 0),
+                            Direction = 3
                         },
                         new
                         {
                             Id = 157,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 11, 10, 0, 0),
-                            Direction = 0
+                            BusLineId = 7,
+                            DepartureTime = new TimeSpan(0, 16, 0, 0, 0),
+                            Direction = 3
                         },
                         new
                         {
                             Id = 158,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 11, 30, 0, 0),
-                            Direction = 0
+                            BusLineId = 7,
+                            DepartureTime = new TimeSpan(0, 16, 30, 0, 0),
+                            Direction = 3
                         },
                         new
                         {
                             Id = 159,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 11, 45, 0, 0),
-                            Direction = 0
+                            BusLineId = 7,
+                            DepartureTime = new TimeSpan(0, 17, 0, 0, 0),
+                            Direction = 3
                         },
                         new
                         {
                             Id = 160,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 12, 0, 0, 0),
-                            Direction = 0
+                            BusLineId = 7,
+                            DepartureTime = new TimeSpan(0, 17, 30, 0, 0),
+                            Direction = 3
                         },
                         new
                         {
                             Id = 161,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 12, 15, 0, 0),
-                            Direction = 0
+                            BusLineId = 7,
+                            DepartureTime = new TimeSpan(0, 18, 0, 0, 0),
+                            Direction = 3
                         },
                         new
                         {
                             Id = 162,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 12, 30, 0, 0),
-                            Direction = 0
+                            BusLineId = 7,
+                            DepartureTime = new TimeSpan(0, 18, 30, 0, 0),
+                            Direction = 3
                         },
                         new
                         {
                             Id = 163,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 12, 45, 0, 0),
-                            Direction = 0
+                            BusLineId = 7,
+                            DepartureTime = new TimeSpan(0, 19, 0, 0, 0),
+                            Direction = 3
                         },
                         new
                         {
                             Id = 164,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 13, 0, 0, 0),
-                            Direction = 0
+                            BusLineId = 7,
+                            DepartureTime = new TimeSpan(0, 19, 30, 0, 0),
+                            Direction = 3
                         },
                         new
                         {
                             Id = 165,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 13, 15, 0, 0),
-                            Direction = 0
+                            BusLineId = 7,
+                            DepartureTime = new TimeSpan(0, 20, 0, 0, 0),
+                            Direction = 3
                         },
                         new
                         {
                             Id = 166,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 13, 30, 0, 0),
-                            Direction = 0
+                            BusLineId = 7,
+                            DepartureTime = new TimeSpan(0, 20, 30, 0, 0),
+                            Direction = 3
                         },
                         new
                         {
                             Id = 167,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 13, 45, 0, 0),
-                            Direction = 0
-                        },
-                        new
-                        {
-                            Id = 168,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 14, 0, 0, 0),
-                            Direction = 0
-                        },
-                        new
-                        {
-                            Id = 169,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 14, 20, 0, 0),
-                            Direction = 0
-                        },
-                        new
-                        {
-                            Id = 170,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 14, 40, 0, 0),
-                            Direction = 0
-                        },
-                        new
-                        {
-                            Id = 171,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 15, 0, 0, 0),
-                            Direction = 0
-                        },
-                        new
-                        {
-                            Id = 172,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 15, 20, 0, 0),
-                            Direction = 0
-                        },
-                        new
-                        {
-                            Id = 173,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 15, 40, 0, 0),
-                            Direction = 0
-                        },
-                        new
-                        {
-                            Id = 174,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 16, 0, 0, 0),
-                            Direction = 0
-                        },
-                        new
-                        {
-                            Id = 175,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 16, 25, 0, 0),
-                            Direction = 0
-                        },
-                        new
-                        {
-                            Id = 176,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 16, 45, 0, 0),
-                            Direction = 0
-                        },
-                        new
-                        {
-                            Id = 177,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 17, 5, 0, 0),
-                            Direction = 0
-                        },
-                        new
-                        {
-                            Id = 178,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 17, 20, 0, 0),
-                            Direction = 0
-                        },
-                        new
-                        {
-                            Id = 179,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 17, 35, 0, 0),
-                            Direction = 0
-                        },
-                        new
-                        {
-                            Id = 180,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 17, 55, 0, 0),
-                            Direction = 0
-                        },
-                        new
-                        {
-                            Id = 181,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 18, 20, 0, 0),
-                            Direction = 0
-                        },
-                        new
-                        {
-                            Id = 182,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 18, 45, 0, 0),
-                            Direction = 0
-                        },
-                        new
-                        {
-                            Id = 183,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 19, 10, 0, 0),
-                            Direction = 0
-                        },
-                        new
-                        {
-                            Id = 184,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 19, 30, 0, 0),
-                            Direction = 0
-                        },
-                        new
-                        {
-                            Id = 185,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 19, 50, 0, 0),
-                            Direction = 0
-                        },
-                        new
-                        {
-                            Id = 186,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 20, 15, 0, 0),
-                            Direction = 0
-                        },
-                        new
-                        {
-                            Id = 187,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 20, 45, 0, 0),
-                            Direction = 0
-                        },
-                        new
-                        {
-                            Id = 188,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 21, 15, 0, 0),
-                            Direction = 0
-                        },
-                        new
-                        {
-                            Id = 189,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 21, 50, 0, 0),
-                            Direction = 0
-                        },
-                        new
-                        {
-                            Id = 190,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 22, 25, 0, 0),
-                            Direction = 0
-                        },
-                        new
-                        {
-                            Id = 191,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 23, 15, 0, 0),
-                            Direction = 0
-                        },
-                        new
-                        {
-                            Id = 192,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 5, 0, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 193,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 5, 25, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 194,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 5, 50, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 195,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 6, 5, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 196,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 6, 20, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 197,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 6, 35, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 198,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 6, 50, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 199,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 7, 5, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 200,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 7, 20, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 201,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 7, 35, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 202,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 7, 50, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 203,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 8, 5, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 204,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 8, 20, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 205,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 8, 35, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 206,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 8, 50, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 207,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 9, 5, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 208,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 9, 25, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 209,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 9, 45, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 210,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 10, 5, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 211,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 10, 25, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 212,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 10, 45, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 213,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 11, 5, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 214,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 11, 25, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 215,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 11, 50, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 216,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 12, 5, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 217,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 12, 20, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 218,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 12, 35, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 219,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 12, 50, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 220,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 13, 5, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 221,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 13, 20, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 222,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 13, 40, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 223,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 14, 0, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 224,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 14, 20, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 225,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 14, 40, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 226,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 15, 0, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 227,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 15, 25, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 228,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 15, 50, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 229,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 16, 5, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 230,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 16, 20, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 231,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 16, 35, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 232,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 16, 50, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 233,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 17, 5, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 234,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 17, 25, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 235,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 17, 50, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 236,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 18, 10, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 237,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 18, 30, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 238,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 18, 50, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 239,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 19, 10, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 240,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 19, 30, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 241,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 19, 50, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 242,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 20, 10, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 243,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 20, 35, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 244,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 21, 5, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 245,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 21, 35, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 246,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 22, 5, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 247,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 22, 35, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 248,
-                            BusLineId = 3,
-                            DepartureTime = new TimeSpan(0, 23, 15, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 249,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 4, 45, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 250,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 5, 5, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 251,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 5, 25, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 252,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 5, 45, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 253,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 6, 6, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 254,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 6, 24, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 255,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 6, 42, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 256,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 7, 0, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 257,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 7, 15, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 258,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 7, 30, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 259,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 7, 45, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 260,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 8, 0, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 261,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 8, 15, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 262,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 8, 30, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 263,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 8, 45, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 264,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 9, 0, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 265,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 9, 15, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 266,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 9, 30, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 267,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 9, 45, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 268,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 10, 0, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 269,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 10, 18, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 270,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 10, 38, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 271,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 10, 58, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 272,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 11, 18, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 273,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 11, 35, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 274,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 11, 51, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 275,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 12, 6, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 276,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 12, 21, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 277,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 12, 36, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 278,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 12, 51, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 279,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 13, 6, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 280,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 13, 21, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 281,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 13, 36, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 282,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 13, 51, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 283,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 14, 10, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 284,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 14, 30, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 285,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 14, 50, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 286,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 15, 10, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 287,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 15, 30, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 288,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 15, 50, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 289,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 16, 10, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 290,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 16, 30, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 291,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 16, 45, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 292,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 17, 0, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 293,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 17, 15, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 294,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 17, 30, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 295,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 17, 45, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 296,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 18, 0, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 297,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 18, 20, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 298,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 18, 40, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 299,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 19, 0, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 300,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 19, 20, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 301,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 19, 40, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 302,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 20, 0, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 303,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 20, 28, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 304,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 20, 58, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 305,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 21, 28, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 306,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 21, 58, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 307,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 22, 28, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 308,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 23, 10, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 309,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 4, 40, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 310,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 5, 10, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 311,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 5, 30, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 312,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 5, 45, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 313,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 6, 0, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 314,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 6, 15, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 315,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 6, 30, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 316,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 6, 45, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 317,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 7, 0, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 318,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 7, 15, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 319,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 7, 30, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 320,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 7, 45, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 321,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 8, 0, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 322,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 8, 15, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 323,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 8, 30, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 324,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 8, 45, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 325,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 9, 0, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 326,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 9, 18, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 327,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 9, 38, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 328,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 9, 58, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 329,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 10, 18, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 330,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 10, 38, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 331,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 10, 58, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 332,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 11, 15, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 333,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 11, 30, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 334,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 11, 45, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 335,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 12, 0, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 336,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 12, 15, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 337,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 12, 30, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 338,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 12, 45, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 339,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 13, 0, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 340,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 13, 15, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 341,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 13, 35, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 342,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 13, 55, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 343,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 14, 15, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 344,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 14, 35, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 345,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 14, 55, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 346,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 15, 15, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 347,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 15, 30, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 348,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 15, 45, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 349,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 16, 0, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 350,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 16, 15, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 351,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 16, 30, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 352,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 16, 45, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 353,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 17, 0, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 354,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 17, 15, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 355,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 17, 30, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 356,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 17, 45, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 357,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 18, 0, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 358,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 18, 20, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 359,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 18, 40, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 360,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 19, 0, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 361,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 19, 20, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 362,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 19, 40, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 363,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 20, 0, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 364,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 20, 23, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 365,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 20, 53, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 366,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 21, 23, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 367,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 21, 53, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 368,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 22, 23, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 369,
-                            BusLineId = 4,
-                            DepartureTime = new TimeSpan(0, 23, 10, 0, 0),
-                            Direction = 1
-                        },
-                        new
-                        {
-                            Id = 370,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 4, 40, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 371,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 5, 0, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 372,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 5, 20, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 373,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 5, 40, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 374,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 6, 0, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 375,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 6, 15, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 376,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 6, 30, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 377,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 6, 45, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 378,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 7, 0, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 379,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 7, 15, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 380,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 7, 30, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 381,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 7, 45, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 382,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 8, 0, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 383,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 8, 15, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 384,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 8, 30, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 385,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 8, 45, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 386,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 9, 0, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 387,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 9, 15, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 388,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 9, 30, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 389,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 9, 45, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 390,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 10, 0, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 391,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 10, 15, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 392,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 10, 30, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 393,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 10, 45, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 394,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 11, 0, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 395,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 11, 15, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 396,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 11, 30, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 397,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 11, 45, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 398,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 12, 0, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 399,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 12, 20, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 400,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 12, 40, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 401,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 13, 0, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 402,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 13, 20, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 403,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 13, 40, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 404,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 14, 0, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 405,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 14, 20, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 406,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 14, 30, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 407,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 14, 40, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 408,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 15, 0, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 409,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 15, 20, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 410,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 15, 40, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 411,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 16, 0, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 412,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 16, 20, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 413,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 16, 40, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 414,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 17, 0, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 415,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 17, 20, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 416,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 17, 40, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 417,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 18, 0, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 418,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 18, 20, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 419,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 18, 35, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 420,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 18, 55, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 421,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 19, 15, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 422,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 19, 30, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 423,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 19, 45, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 424,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 20, 3, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 425,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 20, 20, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 426,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 20, 40, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 427,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 21, 3, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 428,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 21, 30, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 429,
-                            BusLineId = 5,
-                            DepartureTime = new TimeSpan(0, 22, 5, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 430,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 4, 40, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 431,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 5, 0, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 432,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 5, 20, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 433,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 5, 40, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 434,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 6, 3, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 435,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 6, 15, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 436,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 6, 30, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 437,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 6, 45, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 438,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 7, 3, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 439,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 7, 15, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 440,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 7, 30, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 441,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 7, 45, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 442,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 8, 3, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 443,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 8, 15, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 444,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 8, 30, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 445,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 8, 45, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 446,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 9, 0, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 447,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 9, 15, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 448,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 9, 30, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 449,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 9, 45, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 450,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 10, 0, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 451,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 10, 20, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 452,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 10, 40, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 453,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 11, 0, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 454,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 11, 15, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 455,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 11, 30, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 456,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 11, 45, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 457,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 12, 0, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 458,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 12, 15, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 459,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 12, 30, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 460,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 12, 45, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 461,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 13, 0, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 462,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 13, 15, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 463,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 13, 30, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 464,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 13, 45, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 465,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 14, 3, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 466,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 14, 15, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 467,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 14, 30, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 468,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 14, 45, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 469,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 15, 3, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 470,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 15, 15, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 471,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 15, 30, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 472,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 15, 45, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 473,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 16, 0, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 474,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 16, 20, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 475,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 16, 40, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 476,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 17, 3, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 477,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 17, 15, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 478,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 17, 30, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 479,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 17, 45, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 480,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 18, 3, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 481,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 18, 15, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 482,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 18, 30, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 483,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 18, 50, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 484,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 19, 10, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 485,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 19, 30, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 486,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 19, 50, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 487,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 20, 10, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 488,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 20, 30, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 489,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 20, 50, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 490,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 21, 10, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 491,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 21, 30, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 492,
-                            BusLineId = 6,
-                            DepartureTime = new TimeSpan(0, 22, 5, 0, 0),
-                            Direction = 2
-                        },
-                        new
-                        {
-                            Id = 493,
-                            BusLineId = 7,
-                            DepartureTime = new TimeSpan(0, 6, 0, 0, 0),
-                            Direction = 3
-                        },
-                        new
-                        {
-                            Id = 494,
-                            BusLineId = 7,
-                            DepartureTime = new TimeSpan(0, 6, 30, 0, 0),
-                            Direction = 3
-                        },
-                        new
-                        {
-                            Id = 495,
-                            BusLineId = 7,
-                            DepartureTime = new TimeSpan(0, 7, 0, 0, 0),
-                            Direction = 3
-                        },
-                        new
-                        {
-                            Id = 496,
-                            BusLineId = 7,
-                            DepartureTime = new TimeSpan(0, 7, 30, 0, 0),
-                            Direction = 3
-                        },
-                        new
-                        {
-                            Id = 497,
-                            BusLineId = 7,
-                            DepartureTime = new TimeSpan(0, 8, 0, 0, 0),
-                            Direction = 3
-                        },
-                        new
-                        {
-                            Id = 498,
-                            BusLineId = 7,
-                            DepartureTime = new TimeSpan(0, 8, 30, 0, 0),
-                            Direction = 3
-                        },
-                        new
-                        {
-                            Id = 499,
-                            BusLineId = 7,
-                            DepartureTime = new TimeSpan(0, 9, 0, 0, 0),
-                            Direction = 3
-                        },
-                        new
-                        {
-                            Id = 500,
-                            BusLineId = 7,
-                            DepartureTime = new TimeSpan(0, 9, 30, 0, 0),
-                            Direction = 3
-                        },
-                        new
-                        {
-                            Id = 501,
-                            BusLineId = 7,
-                            DepartureTime = new TimeSpan(0, 10, 0, 0, 0),
-                            Direction = 3
-                        },
-                        new
-                        {
-                            Id = 502,
-                            BusLineId = 7,
-                            DepartureTime = new TimeSpan(0, 10, 30, 0, 0),
-                            Direction = 3
-                        },
-                        new
-                        {
-                            Id = 503,
-                            BusLineId = 7,
-                            DepartureTime = new TimeSpan(0, 11, 0, 0, 0),
-                            Direction = 3
-                        },
-                        new
-                        {
-                            Id = 504,
-                            BusLineId = 7,
-                            DepartureTime = new TimeSpan(0, 11, 30, 0, 0),
-                            Direction = 3
-                        },
-                        new
-                        {
-                            Id = 505,
-                            BusLineId = 7,
-                            DepartureTime = new TimeSpan(0, 12, 0, 0, 0),
-                            Direction = 3
-                        },
-                        new
-                        {
-                            Id = 506,
-                            BusLineId = 7,
-                            DepartureTime = new TimeSpan(0, 12, 30, 0, 0),
-                            Direction = 3
-                        },
-                        new
-                        {
-                            Id = 507,
-                            BusLineId = 7,
-                            DepartureTime = new TimeSpan(0, 13, 0, 0, 0),
-                            Direction = 3
-                        },
-                        new
-                        {
-                            Id = 508,
-                            BusLineId = 7,
-                            DepartureTime = new TimeSpan(0, 13, 30, 0, 0),
-                            Direction = 3
-                        },
-                        new
-                        {
-                            Id = 509,
-                            BusLineId = 7,
-                            DepartureTime = new TimeSpan(0, 14, 0, 0, 0),
-                            Direction = 3
-                        },
-                        new
-                        {
-                            Id = 510,
-                            BusLineId = 7,
-                            DepartureTime = new TimeSpan(0, 14, 30, 0, 0),
-                            Direction = 3
-                        },
-                        new
-                        {
-                            Id = 511,
-                            BusLineId = 7,
-                            DepartureTime = new TimeSpan(0, 15, 0, 0, 0),
-                            Direction = 3
-                        },
-                        new
-                        {
-                            Id = 512,
-                            BusLineId = 7,
-                            DepartureTime = new TimeSpan(0, 15, 30, 0, 0),
-                            Direction = 3
-                        },
-                        new
-                        {
-                            Id = 513,
-                            BusLineId = 7,
-                            DepartureTime = new TimeSpan(0, 16, 0, 0, 0),
-                            Direction = 3
-                        },
-                        new
-                        {
-                            Id = 514,
-                            BusLineId = 7,
-                            DepartureTime = new TimeSpan(0, 16, 30, 0, 0),
-                            Direction = 3
-                        },
-                        new
-                        {
-                            Id = 515,
-                            BusLineId = 7,
-                            DepartureTime = new TimeSpan(0, 17, 0, 0, 0),
-                            Direction = 3
-                        },
-                        new
-                        {
-                            Id = 516,
-                            BusLineId = 7,
-                            DepartureTime = new TimeSpan(0, 17, 30, 0, 0),
-                            Direction = 3
-                        },
-                        new
-                        {
-                            Id = 517,
-                            BusLineId = 7,
-                            DepartureTime = new TimeSpan(0, 18, 0, 0, 0),
-                            Direction = 3
-                        },
-                        new
-                        {
-                            Id = 518,
-                            BusLineId = 7,
-                            DepartureTime = new TimeSpan(0, 18, 30, 0, 0),
-                            Direction = 3
-                        },
-                        new
-                        {
-                            Id = 519,
-                            BusLineId = 7,
-                            DepartureTime = new TimeSpan(0, 19, 0, 0, 0),
-                            Direction = 3
-                        },
-                        new
-                        {
-                            Id = 520,
-                            BusLineId = 7,
-                            DepartureTime = new TimeSpan(0, 19, 30, 0, 0),
-                            Direction = 3
-                        },
-                        new
-                        {
-                            Id = 521,
-                            BusLineId = 7,
-                            DepartureTime = new TimeSpan(0, 20, 0, 0, 0),
-                            Direction = 3
-                        },
-                        new
-                        {
-                            Id = 522,
-                            BusLineId = 7,
-                            DepartureTime = new TimeSpan(0, 20, 30, 0, 0),
-                            Direction = 3
-                        },
-                        new
-                        {
-                            Id = 523,
                             BusLineId = 7,
                             DepartureTime = new TimeSpan(0, 21, 0, 0, 0),
                             Direction = 3
                         },
                         new
                         {
-                            Id = 524,
+                            Id = 168,
                             BusLineId = 7,
                             DepartureTime = new TimeSpan(0, 21, 30, 0, 0),
                             Direction = 3
                         },
                         new
                         {
-                            Id = 525,
+                            Id = 169,
                             BusLineId = 7,
                             DepartureTime = new TimeSpan(0, 22, 0, 0, 0),
                             Direction = 3
                         },
                         new
                         {
-                            Id = 526,
+                            Id = 170,
                             BusLineId = 7,
                             DepartureTime = new TimeSpan(0, 6, 15, 0, 0),
                             Direction = 4
                         },
                         new
                         {
-                            Id = 527,
+                            Id = 171,
                             BusLineId = 7,
                             DepartureTime = new TimeSpan(0, 6, 45, 0, 0),
                             Direction = 4
                         },
                         new
                         {
-                            Id = 528,
+                            Id = 172,
                             BusLineId = 7,
                             DepartureTime = new TimeSpan(0, 7, 15, 0, 0),
                             Direction = 4
                         },
                         new
                         {
-                            Id = 529,
+                            Id = 173,
                             BusLineId = 7,
                             DepartureTime = new TimeSpan(0, 7, 45, 0, 0),
                             Direction = 4
                         },
                         new
                         {
-                            Id = 530,
+                            Id = 174,
                             BusLineId = 7,
                             DepartureTime = new TimeSpan(0, 8, 15, 0, 0),
                             Direction = 4
                         },
                         new
                         {
-                            Id = 531,
+                            Id = 175,
                             BusLineId = 7,
                             DepartureTime = new TimeSpan(0, 8, 45, 0, 0),
                             Direction = 4
                         },
                         new
                         {
-                            Id = 532,
+                            Id = 176,
                             BusLineId = 7,
                             DepartureTime = new TimeSpan(0, 9, 15, 0, 0),
                             Direction = 4
                         },
                         new
                         {
-                            Id = 533,
+                            Id = 177,
                             BusLineId = 7,
                             DepartureTime = new TimeSpan(0, 9, 45, 0, 0),
                             Direction = 4
                         },
                         new
                         {
-                            Id = 534,
+                            Id = 178,
                             BusLineId = 7,
                             DepartureTime = new TimeSpan(0, 10, 15, 0, 0),
                             Direction = 4
                         },
                         new
                         {
-                            Id = 535,
+                            Id = 179,
                             BusLineId = 7,
                             DepartureTime = new TimeSpan(0, 10, 45, 0, 0),
                             Direction = 4
                         },
                         new
                         {
-                            Id = 536,
+                            Id = 180,
                             BusLineId = 7,
                             DepartureTime = new TimeSpan(0, 11, 15, 0, 0),
                             Direction = 4
                         },
                         new
                         {
-                            Id = 537,
+                            Id = 181,
                             BusLineId = 7,
                             DepartureTime = new TimeSpan(0, 11, 45, 0, 0),
                             Direction = 4
                         },
                         new
                         {
-                            Id = 538,
+                            Id = 182,
                             BusLineId = 7,
                             DepartureTime = new TimeSpan(0, 12, 15, 0, 0),
                             Direction = 4
                         },
                         new
                         {
-                            Id = 539,
+                            Id = 183,
                             BusLineId = 7,
                             DepartureTime = new TimeSpan(0, 12, 45, 0, 0),
                             Direction = 4
                         },
                         new
                         {
-                            Id = 540,
+                            Id = 184,
                             BusLineId = 7,
                             DepartureTime = new TimeSpan(0, 13, 15, 0, 0),
                             Direction = 4
                         },
                         new
                         {
-                            Id = 541,
+                            Id = 185,
                             BusLineId = 7,
                             DepartureTime = new TimeSpan(0, 13, 45, 0, 0),
                             Direction = 4
                         },
                         new
                         {
-                            Id = 542,
+                            Id = 186,
                             BusLineId = 7,
                             DepartureTime = new TimeSpan(0, 14, 15, 0, 0),
                             Direction = 4
                         },
                         new
                         {
-                            Id = 543,
+                            Id = 187,
                             BusLineId = 7,
                             DepartureTime = new TimeSpan(0, 14, 45, 0, 0),
                             Direction = 4
                         },
                         new
                         {
-                            Id = 544,
+                            Id = 188,
                             BusLineId = 7,
                             DepartureTime = new TimeSpan(0, 15, 15, 0, 0),
                             Direction = 4
                         },
                         new
                         {
-                            Id = 545,
+                            Id = 189,
                             BusLineId = 7,
                             DepartureTime = new TimeSpan(0, 15, 45, 0, 0),
                             Direction = 4
                         },
                         new
                         {
-                            Id = 546,
+                            Id = 190,
                             BusLineId = 7,
                             DepartureTime = new TimeSpan(0, 16, 15, 0, 0),
                             Direction = 4
                         },
                         new
                         {
-                            Id = 547,
+                            Id = 191,
                             BusLineId = 7,
                             DepartureTime = new TimeSpan(0, 16, 45, 0, 0),
                             Direction = 4
                         },
                         new
                         {
-                            Id = 548,
+                            Id = 192,
                             BusLineId = 7,
                             DepartureTime = new TimeSpan(0, 17, 15, 0, 0),
                             Direction = 4
                         },
                         new
                         {
-                            Id = 549,
+                            Id = 193,
                             BusLineId = 7,
                             DepartureTime = new TimeSpan(0, 17, 45, 0, 0),
                             Direction = 4
                         },
                         new
                         {
-                            Id = 550,
+                            Id = 194,
                             BusLineId = 7,
                             DepartureTime = new TimeSpan(0, 18, 15, 0, 0),
                             Direction = 4
                         },
                         new
                         {
-                            Id = 551,
+                            Id = 195,
                             BusLineId = 7,
                             DepartureTime = new TimeSpan(0, 18, 45, 0, 0),
                             Direction = 4
                         },
                         new
                         {
-                            Id = 552,
+                            Id = 196,
                             BusLineId = 7,
                             DepartureTime = new TimeSpan(0, 19, 15, 0, 0),
                             Direction = 4
                         },
                         new
                         {
-                            Id = 553,
+                            Id = 197,
                             BusLineId = 7,
                             DepartureTime = new TimeSpan(0, 19, 45, 0, 0),
                             Direction = 4
                         },
                         new
                         {
-                            Id = 554,
+                            Id = 198,
                             BusLineId = 7,
                             DepartureTime = new TimeSpan(0, 20, 15, 0, 0),
                             Direction = 4
                         },
                         new
                         {
-                            Id = 555,
+                            Id = 199,
                             BusLineId = 7,
                             DepartureTime = new TimeSpan(0, 20, 45, 0, 0),
                             Direction = 4
                         },
                         new
                         {
-                            Id = 556,
+                            Id = 200,
                             BusLineId = 7,
                             DepartureTime = new TimeSpan(0, 21, 15, 0, 0),
                             Direction = 4
                         },
                         new
                         {
-                            Id = 557,
+                            Id = 201,
                             BusLineId = 7,
                             DepartureTime = new TimeSpan(0, 21, 45, 0, 0),
                             Direction = 4
                         },
                         new
                         {
-                            Id = 558,
+                            Id = 202,
                             BusLineId = 7,
                             DepartureTime = new TimeSpan(0, 22, 15, 0, 0),
                             Direction = 4
                         },
                         new
                         {
-                            Id = 559,
+                            Id = 203,
                             BusLineId = 8,
                             DepartureTime = new TimeSpan(0, 23, 0, 0, 0),
                             Direction = 2
                         },
                         new
                         {
-                            Id = 560,
+                            Id = 204,
                             BusLineId = 8,
                             DepartureTime = new TimeSpan(0, 0, 0, 0, 0),
                             Direction = 2
                         },
                         new
                         {
-                            Id = 561,
+                            Id = 205,
                             BusLineId = 8,
                             DepartureTime = new TimeSpan(0, 1, 0, 0, 0),
                             Direction = 2
                         },
                         new
                         {
-                            Id = 562,
+                            Id = 206,
                             BusLineId = 8,
                             DepartureTime = new TimeSpan(0, 2, 0, 0, 0),
                             Direction = 2
                         },
                         new
                         {
-                            Id = 563,
+                            Id = 207,
                             BusLineId = 8,
                             DepartureTime = new TimeSpan(0, 3, 0, 0, 0),
                             Direction = 2
                         },
                         new
                         {
-                            Id = 564,
+                            Id = 208,
                             BusLineId = 8,
                             DepartureTime = new TimeSpan(0, 4, 0, 0, 0),
                             Direction = 2
                         },
                         new
                         {
-                            Id = 565,
+                            Id = 209,
                             BusLineId = 8,
                             DepartureTime = new TimeSpan(0, 23, 15, 0, 0),
                             Direction = 1
                         },
                         new
                         {
-                            Id = 566,
+                            Id = 210,
                             BusLineId = 8,
                             DepartureTime = new TimeSpan(0, 0, 15, 0, 0),
                             Direction = 1
                         },
                         new
                         {
-                            Id = 567,
+                            Id = 211,
                             BusLineId = 8,
                             DepartureTime = new TimeSpan(0, 1, 15, 0, 0),
                             Direction = 1
                         },
                         new
                         {
-                            Id = 568,
+                            Id = 212,
                             BusLineId = 8,
                             DepartureTime = new TimeSpan(0, 2, 15, 0, 0),
                             Direction = 1
                         },
                         new
                         {
-                            Id = 569,
+                            Id = 213,
                             BusLineId = 8,
                             DepartureTime = new TimeSpan(0, 3, 15, 0, 0),
                             Direction = 1
                         },
                         new
                         {
-                            Id = 570,
+                            Id = 214,
                             BusLineId = 8,
                             DepartureTime = new TimeSpan(0, 4, 15, 0, 0),
                             Direction = 1
                         });
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("Transport.Data.Models.RouteStop", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Transport.Web.Models.RouteStop", b =>
-                {
-                    b.HasOne("Transport.Web.Models.BusLine", "BusLine")
+                    b.HasOne("Transport.Data.Models.BusLine", "BusLine")
                         .WithMany("RouteStops")
                         .HasForeignKey("BusLineId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Transport.Web.Models.BusStop", "BusStop")
+                    b.HasOne("Transport.Data.Models.BusStop", "BusStop")
                         .WithMany("RouteStops")
                         .HasForeignKey("BusStopId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -7577,9 +4832,9 @@ namespace Transport.Web.Migrations
                     b.Navigation("BusStop");
                 });
 
-            modelBuilder.Entity("Transport.Web.Models.Schedule", b =>
+            modelBuilder.Entity("Transport.Data.Models.Schedule", b =>
                 {
-                    b.HasOne("Transport.Web.Models.BusLine", "BusLine")
+                    b.HasOne("Transport.Data.Models.BusLine", "BusLine")
                         .WithMany("Departures")
                         .HasForeignKey("BusLineId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -7588,14 +4843,14 @@ namespace Transport.Web.Migrations
                     b.Navigation("BusLine");
                 });
 
-            modelBuilder.Entity("Transport.Web.Models.BusLine", b =>
+            modelBuilder.Entity("Transport.Data.Models.BusLine", b =>
                 {
                     b.Navigation("Departures");
 
                     b.Navigation("RouteStops");
                 });
 
-            modelBuilder.Entity("Transport.Web.Models.BusStop", b =>
+            modelBuilder.Entity("Transport.Data.Models.BusStop", b =>
                 {
                     b.Navigation("RouteStops");
                 });
