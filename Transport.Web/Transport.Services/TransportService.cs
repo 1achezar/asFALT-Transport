@@ -4,6 +4,7 @@ using System.Data;
 using System.Text;
 using Transport.Web.Data;
 using Transport.Web.Models;
+using RouteDirection = Transport.Web.Models.RouteDirection;
 using Transport.Services.DTOs;
 
 namespace Transport.Services

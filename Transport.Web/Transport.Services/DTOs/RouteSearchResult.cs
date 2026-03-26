@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Transport.Web.Models;
+using RouteDirection = Transport.Web.Models.RouteDirection;
 
 namespace Transport.Services.DTOs
 {
