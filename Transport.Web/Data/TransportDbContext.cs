@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Transport.Web.Data;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Transport.Web.Models;
 using RouteDirection = Transport.Web.Models.RouteDirection;
 

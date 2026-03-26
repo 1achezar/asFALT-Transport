@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
-using Transport.Data;
-using Transport.Data.Models;
+using Transport.Web.Data;
+using Transport.Web.Models;
 using Transport.Services.DTOs;
 
 namespace Transport.Services

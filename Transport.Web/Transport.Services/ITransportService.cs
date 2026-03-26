@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Transport.Data.Models;
+using Transport.Web.Models;
 using Transport.Services.DTOs;
 
 namespace Transport.Services
