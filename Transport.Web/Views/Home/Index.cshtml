@@ -1,8 +1,54 @@
-﻿@{
+﻿@using Transport.Services;
+@using Transport.Services.DTOs;
+@inject ITransportService TransportService
+
+@{
     ViewData["Title"] = "asFALT Transport";
+    IEnumerable<RouteSearchResult> routes;
+    if (ViewData["Routes"] != null)
+    {
+        routes = (IEnumerable<RouteSearchResult>)ViewData["Routes"];
+    }
+    else
+    {
+        routes = new List<RouteSearchResult>();
+    }
 }
 
-<div class="text-center">
-    <h1 class="display-4">asFALT</h1>
-    <p>Моля изберете автобусна линия:</a>.</p>
-</div>
+<h2>asFalt Transport</h2>
+<form method="post">
+    <label>Изберете начална спирка:</label>
+    <select name="fromStop"></select>
+    <label>Изберете крайна спирка:</label>
+    <select name="toStop"></select>
+    <button type="submit">Търси</button>
+</form>
+@if(routes.Any())
+{
+<h3>Маршрути:</h3>
+<table border="1" style="width:50%">
+    <thead>
+        <tr>
+            <th>Линия</th>
+            <th>Посока</th>
+            <th>Времетраене</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var r in routes)
+        {
+            <tr>
+                <td>@r.BusLineNumber</td>
+                <td>@r.Direction</td>
+                <td>@r.TravelMinutes</td>
+            </tr>
+        }
+    </tbody>
+</table>
+}
+else
+{
+    <p>Няма намерени маршрути</p>
+}
+
+
