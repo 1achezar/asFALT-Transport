@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Transport.Web.Models
 {
+    // Represents a bus stop within a route with order and timing details
     public class RouteStop
     {
         public int Id { get; set; }

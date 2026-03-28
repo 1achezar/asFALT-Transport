@@ -10,8 +10,12 @@ using RouteDirection = Transport.Web.Models.RouteDirection;
 
 namespace Transport.Tests
 {
-    public class Tests
+    public class TransportServiceTests
     {
+        // Creates an in-memory test database with sample data 
+        // This method simulates a real transport system environment so unit tests can run
+        // without using the actual database. Each call creates a fresh database instance
+        // to ensure tests are isolated and do not affect each other.
         private TransportDbContext GetDbContext()
         {
             var options = new DbContextOptionsBuilder<TransportDbContext>()
@@ -57,7 +61,7 @@ namespace Transport.Tests
             return context;
         }
 
-        // Test 1: returns time
+        // Returns time
         [Test]
         public void GetNextDepartures_ShouldReturnTime()
         {
@@ -70,7 +74,7 @@ namespace Transport.Tests
             Assert.That(result.First().DepartureFromStop, Is.EqualTo(new TimeSpan(8, 0, 0)));
         }
 
-        // Test 2: iterates through list
+        // Iterates through list
         [Test]
         public void GetNextDepartures_ShouldIterateSchedules()
         {
@@ -92,7 +96,7 @@ namespace Transport.Tests
             Assert.That(result.Count() >= 2);
         }
 
-        // Test 3: start and end stop selection
+        // Start and end stop selection
         [Test]
         public void FindRoutes_ShouldMatchStops()
         {

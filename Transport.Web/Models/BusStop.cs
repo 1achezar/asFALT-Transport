@@ -1,5 +1,6 @@
 ﻿namespace Transport.Web.Models
 {
+    // Represents a bus stop and its associated routes
     public class BusStop
     {
         public int Id { get; set; }

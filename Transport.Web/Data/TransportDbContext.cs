@@ -15,11 +15,13 @@ public class TransportDbContext : IdentityDbContext
         : base(options)
     {
     }
+    // Represents database tables for the main entities in the transport system.
     public DbSet<BusStop> BusStops { get; set; }
     public DbSet<BusLine> BusLines { get; set; }
     public DbSet<RouteStop> RouteStops { get; set; }
     public DbSet<Schedule> Schedules { get; set; }
 
+    // Sets a default SQL Server connection if none are already provided 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         if (!optionsBuilder.IsConfigured)
@@ -28,6 +30,7 @@ public class TransportDbContext : IdentityDbContext
         }
     }
 
+    // Defines the model and initial seed data for the database for bus stops, lines and scheduels 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -130,7 +133,7 @@ public class TransportDbContext : IdentityDbContext
             new BusLine { Id = 8, Number = "Нощна Линия" }
             );
         modelBuilder.Entity<RouteStop>().HasData(
-            //Линия Б1 (Id 1 - 32)
+            // Line B1 from Izgrev (Id 1 - 16)
             new RouteStop { Id = 1, BusLineId = 1, BusStopId = 1, StopOrder = 1, MinutesFromStart = 0, Direction = RouteDirection.FromIzgrev },
             new RouteStop { Id = 2, BusLineId = 1, BusStopId = 2, StopOrder = 2, MinutesFromStart = 2, Direction = RouteDirection.FromIzgrev },
             new RouteStop { Id = 3, BusLineId = 1, BusStopId = 3, StopOrder = 3, MinutesFromStart = 3, Direction = RouteDirection.FromIzgrev },
@@ -147,7 +150,7 @@ public class TransportDbContext : IdentityDbContext
             new RouteStop { Id = 14, BusLineId = 1, BusStopId = 14, StopOrder = 14, MinutesFromStart = 29, Direction = RouteDirection.FromIzgrev },
             new RouteStop { Id = 15, BusLineId = 1, BusStopId = 15, StopOrder = 15, MinutesFromStart = 31, Direction = RouteDirection.FromIzgrev },
             new RouteStop { Id = 16, BusLineId = 1, BusStopId = 16, StopOrder = 16, MinutesFromStart = 34, Direction = RouteDirection.FromIzgrev },
-            // Б1 Обратно
+            // Line B1 from Meden Rudnik (Id 17 - 32)
             new RouteStop { Id = 17, BusLineId = 1, BusStopId = 16, StopOrder = 1, MinutesFromStart = 0, Direction = RouteDirection.FromMedenRudnik },
             new RouteStop { Id = 18, BusLineId = 1, BusStopId = 15, StopOrder = 2, MinutesFromStart = 3, Direction = RouteDirection.FromMedenRudnik },
             new RouteStop { Id = 19, BusLineId = 1, BusStopId = 14, StopOrder = 3, MinutesFromStart = 5, Direction = RouteDirection.FromMedenRudnik },
@@ -165,7 +168,7 @@ public class TransportDbContext : IdentityDbContext
             new RouteStop { Id = 31, BusLineId = 1, BusStopId = 2, StopOrder = 15, MinutesFromStart = 46, Direction = RouteDirection.FromMedenRudnik },
             new RouteStop { Id = 32, BusLineId = 1, BusStopId = 1, StopOrder = 16, MinutesFromStart = 48, Direction = RouteDirection.FromMedenRudnik },
 
-            //Линия Б2 (Id 33 - 64)
+            // Line B2 from Slaveykov (Id 33 - 48)
             new RouteStop { Id = 33, BusLineId = 2, BusStopId = 17, StopOrder = 1, MinutesFromStart = 0, Direction = RouteDirection.FromSlaveykov },
             new RouteStop { Id = 34, BusLineId = 2, BusStopId = 18, StopOrder = 2, MinutesFromStart = 2, Direction = RouteDirection.FromSlaveykov },
             new RouteStop { Id = 35, BusLineId = 2, BusStopId = 62, StopOrder = 3, MinutesFromStart = 3, Direction = RouteDirection.FromSlaveykov },
@@ -182,7 +185,7 @@ public class TransportDbContext : IdentityDbContext
             new RouteStop { Id = 46, BusLineId = 2, BusStopId = 14, StopOrder = 14, MinutesFromStart = 30, Direction = RouteDirection.FromSlaveykov },
             new RouteStop { Id = 47, BusLineId = 2, BusStopId = 15, StopOrder = 15, MinutesFromStart = 32, Direction = RouteDirection.FromSlaveykov },
             new RouteStop { Id = 48, BusLineId = 2, BusStopId = 16, StopOrder = 16, MinutesFromStart = 35, Direction = RouteDirection.FromSlaveykov },
-            // Б2 Обратно
+            // Line B2 from Meden Rudnik (Id 49 - 64)
             new RouteStop { Id = 49, BusLineId = 2, BusStopId = 16, StopOrder = 1, MinutesFromStart = 0, Direction = RouteDirection.FromMedenRudnik },
             new RouteStop { Id = 50, BusLineId = 2, BusStopId = 15, StopOrder = 2, MinutesFromStart = 3, Direction = RouteDirection.FromMedenRudnik },
             new RouteStop { Id = 51, BusLineId = 2, BusStopId = 14, StopOrder = 3, MinutesFromStart = 5, Direction = RouteDirection.FromMedenRudnik },
@@ -200,7 +203,7 @@ public class TransportDbContext : IdentityDbContext
             new RouteStop { Id = 63, BusLineId = 2, BusStopId = 18, StopOrder = 15, MinutesFromStart = 33, Direction = RouteDirection.FromMedenRudnik },
             new RouteStop { Id = 64, BusLineId = 2, BusStopId = 17, StopOrder = 16, MinutesFromStart = 35, Direction = RouteDirection.FromMedenRudnik },
 
-            //Линия Б11 (Id 65 - 118)
+            // Line B11 from Izgrev (Id 65 - 91)
             new RouteStop { Id = 65, BusLineId = 3, BusStopId = 1, StopOrder = 1, MinutesFromStart = 0, Direction = RouteDirection.FromIzgrev },
             new RouteStop { Id = 66, BusLineId = 3, BusStopId = 69, StopOrder = 2, MinutesFromStart = 5, Direction = RouteDirection.FromIzgrev },
             new RouteStop { Id = 67, BusLineId = 3, BusStopId = 70, StopOrder = 3, MinutesFromStart = 8, Direction = RouteDirection.FromIzgrev },
@@ -228,7 +231,7 @@ public class TransportDbContext : IdentityDbContext
             new RouteStop { Id = 89, BusLineId = 3, BusStopId = 67, StopOrder = 25, MinutesFromStart = 58, Direction = RouteDirection.FromIzgrev },
             new RouteStop { Id = 90, BusLineId = 3, BusStopId = 68, StopOrder = 26, MinutesFromStart = 60, Direction = RouteDirection.FromIzgrev },
             new RouteStop { Id = 91, BusLineId = 3, BusStopId = 16, StopOrder = 27, MinutesFromStart = 62, Direction = RouteDirection.FromIzgrev },
-            // Б11 Обратно
+            // Line B11 from Meden Rudnik (Id 92 - 115)
             new RouteStop { Id = 92, BusLineId = 3, BusStopId = 16, StopOrder = 1, MinutesFromStart = 0, Direction = RouteDirection.FromMedenRudnik },
             new RouteStop { Id = 93, BusLineId = 3, BusStopId = 68, StopOrder = 2, MinutesFromStart = 2, Direction = RouteDirection.FromMedenRudnik },
             new RouteStop { Id = 94, BusLineId = 3, BusStopId = 67, StopOrder = 3, MinutesFromStart = 4, Direction = RouteDirection.FromMedenRudnik },
@@ -257,7 +260,7 @@ public class TransportDbContext : IdentityDbContext
             new RouteStop { Id = 117, BusLineId = 3, BusStopId = 69, StopOrder = 26, MinutesFromStart = 60, Direction = RouteDirection.FromMedenRudnik },
             new RouteStop { Id = 118, BusLineId = 3, BusStopId = 1, StopOrder = 27, MinutesFromStart = 62, Direction = RouteDirection.FromMedenRudnik },
 
-            //Линия Б12 (Id 119 - 170)
+            // Line B12 from Slaveykov (Id 119 - 143)
             new RouteStop { Id = 119, BusLineId = 4, BusStopId = 17, StopOrder = 1, MinutesFromStart = 0, Direction = RouteDirection.FromSlaveykov },
             new RouteStop { Id = 120, BusLineId = 4, BusStopId = 22, StopOrder = 2, MinutesFromStart = 2, Direction = RouteDirection.FromSlaveykov },
             new RouteStop { Id = 121, BusLineId = 4, BusStopId = 23, StopOrder = 3, MinutesFromStart = 3, Direction = RouteDirection.FromSlaveykov },
@@ -284,7 +287,7 @@ public class TransportDbContext : IdentityDbContext
             new RouteStop { Id = 142, BusLineId = 4, BusStopId = 80, StopOrder = 24, MinutesFromStart = 49, Direction = RouteDirection.FromSlaveykov },
             new RouteStop { Id = 143, BusLineId = 4, BusStopId = 81, StopOrder = 25, MinutesFromStart = 51, Direction = RouteDirection.FromSlaveykov },
             new RouteStop { Id = 144, BusLineId = 4, BusStopId = 16, StopOrder = 26, MinutesFromStart = 53, Direction = RouteDirection.FromSlaveykov },
-            // Б12 Обратно
+            // Line B12 from Meden Rudnik (Id 144 - 168)
             new RouteStop { Id = 145, BusLineId = 4, BusStopId = 16, StopOrder = 1, MinutesFromStart = 0, Direction = RouteDirection.FromMedenRudnik },
             new RouteStop { Id = 146, BusLineId = 4, BusStopId = 81, StopOrder = 2, MinutesFromStart = 2, Direction = RouteDirection.FromMedenRudnik },
             new RouteStop { Id = 147, BusLineId = 4, BusStopId = 80, StopOrder = 3, MinutesFromStart = 4, Direction = RouteDirection.FromMedenRudnik },
@@ -311,7 +314,7 @@ public class TransportDbContext : IdentityDbContext
             new RouteStop { Id = 168, BusLineId = 4, BusStopId = 22, StopOrder = 24, MinutesFromStart = 50, Direction = RouteDirection.FromMedenRudnik },
             new RouteStop { Id = 169, BusLineId = 4, BusStopId = 17, StopOrder = 25, MinutesFromStart = 51, Direction = RouteDirection.FromMedenRudnik },
 
-            //Линия 11 (Id 170 - 202)
+            // Line 11 (Id 169 - 194)  
             new RouteStop { Id = 170, BusLineId = 5, BusStopId = 17, StopOrder = 1, MinutesFromStart = 0, Direction = RouteDirection.FromSlaveykov },
             new RouteStop { Id = 171, BusLineId = 5, BusStopId = 22, StopOrder = 2, MinutesFromStart = 1, Direction = RouteDirection.FromSlaveykov },
             new RouteStop { Id = 172, BusLineId = 5, BusStopId = 23, StopOrder = 3, MinutesFromStart = 2, Direction = RouteDirection.FromSlaveykov },
@@ -346,7 +349,7 @@ public class TransportDbContext : IdentityDbContext
             new RouteStop { Id = 201, BusLineId = 5, BusStopId = 17, StopOrder = 32, MinutesFromStart = 58, Direction = RouteDirection.FromSlaveykov },
             new RouteStop { Id = 202, BusLineId = 5, BusStopId = 11, StopOrder = 33, MinutesFromStart = 60, Direction = RouteDirection.FromSlaveykov },
 
-            //Линия 12 (Id 203 - 229)
+            // Line 12 (Id 203 - 229)
             new RouteStop { Id = 203, BusLineId = 6, BusStopId = 17, StopOrder = 1, MinutesFromStart = 0, Direction = RouteDirection.FromSlaveykov },
             new RouteStop { Id = 204, BusLineId = 6, BusStopId = 47, StopOrder = 2, MinutesFromStart = 1, Direction = RouteDirection.FromSlaveykov },
             new RouteStop { Id = 205, BusLineId = 6, BusStopId = 46, StopOrder = 3, MinutesFromStart = 2, Direction = RouteDirection.FromSlaveykov },
@@ -375,7 +378,7 @@ public class TransportDbContext : IdentityDbContext
             new RouteStop { Id = 228, BusLineId = 6, BusStopId = 22, StopOrder = 26, MinutesFromStart = 48, Direction = RouteDirection.FromSlaveykov },
             new RouteStop { Id = 229, BusLineId = 6, BusStopId = 17, StopOrder = 27, MinutesFromStart = 50, Direction = RouteDirection.FromSlaveykov },
 
-            //Линия 15 (Id 230 - 262)
+            // Line 15 from AvtogaraYug (Id 230 - 262)
             new RouteStop { Id = 230, BusLineId = 7, BusStopId = 10, StopOrder = 1, MinutesFromStart = 0, Direction = RouteDirection.FromAvtogaraYug },
             new RouteStop { Id = 231, BusLineId = 7, BusStopId = 33, StopOrder = 2, MinutesFromStart = 2, Direction = RouteDirection.FromAvtogaraYug },
             new RouteStop { Id = 232, BusLineId = 7, BusStopId = 32, StopOrder = 3, MinutesFromStart = 4, Direction = RouteDirection.FromAvtogaraYug },
@@ -394,7 +397,7 @@ public class TransportDbContext : IdentityDbContext
             new RouteStop { Id = 245, BusLineId = 7, BusStopId = 59, StopOrder = 16, MinutesFromStart = 31, Direction = RouteDirection.FromAvtogaraYug },
             new RouteStop { Id = 246, BusLineId = 7, BusStopId = 60, StopOrder = 17, MinutesFromStart = 32, Direction = RouteDirection.FromAvtogaraYug },
             new RouteStop { Id = 247, BusLineId = 7, BusStopId = 61, StopOrder = 18, MinutesFromStart = 35, Direction = RouteDirection.FromAvtogaraYug },
-            // 15 Обратно
+            // Line 15 from Sarafovo (Id 248 - 262)
             new RouteStop { Id = 248, BusLineId = 7, BusStopId = 64, StopOrder = 1, MinutesFromStart = 0, Direction = RouteDirection.FromSarafovo },
             new RouteStop { Id = 249, BusLineId = 7, BusStopId = 63, StopOrder = 2, MinutesFromStart = 3, Direction = RouteDirection.FromSarafovo },
             new RouteStop { Id = 250, BusLineId = 7, BusStopId = 62, StopOrder = 3, MinutesFromStart = 4, Direction = RouteDirection.FromSarafovo },
@@ -411,7 +414,7 @@ public class TransportDbContext : IdentityDbContext
             new RouteStop { Id = 261, BusLineId = 7, BusStopId = 54, StopOrder = 14, MinutesFromStart = 27, Direction = RouteDirection.FromSarafovo },
             new RouteStop { Id = 262, BusLineId = 7, BusStopId = 53, StopOrder = 15, MinutesFromStart = 35, Direction = RouteDirection.FromSarafovo },
 
-            //Нощна Линия (Id 263 - 304)
+            // Night Line from Slaveykov (Id 263 - 285)
             new RouteStop { Id = 263, BusLineId = 8, BusStopId = 17, StopOrder = 1, MinutesFromStart = 0, Direction = RouteDirection.FromSlaveykov },
             new RouteStop { Id = 264, BusLineId = 8, BusStopId = 47, StopOrder = 2, MinutesFromStart = 1, Direction = RouteDirection.FromSlaveykov },
             new RouteStop { Id = 265, BusLineId = 8, BusStopId = 18, StopOrder = 3, MinutesFromStart = 2, Direction = RouteDirection.FromSlaveykov },
@@ -435,7 +438,7 @@ public class TransportDbContext : IdentityDbContext
             new RouteStop { Id = 283, BusLineId = 8, BusStopId = 67, StopOrder = 21, MinutesFromStart = 38, Direction = RouteDirection.FromSlaveykov },
             new RouteStop { Id = 284, BusLineId = 8, BusStopId = 68, StopOrder = 22, MinutesFromStart = 40, Direction = RouteDirection.FromSlaveykov },
             new RouteStop { Id = 285, BusLineId = 8, BusStopId = 16, StopOrder = 23, MinutesFromStart = 43, Direction = RouteDirection.FromSlaveykov },
-            // Нощна Обратно
+            // Night Line from Meden Rudnik (Id 286 - 304)
             new RouteStop { Id = 286, BusLineId = 8, BusStopId = 16, StopOrder = 1, MinutesFromStart = 0, Direction = RouteDirection.FromMedenRudnik },
             new RouteStop { Id = 287, BusLineId = 8, BusStopId = 15, StopOrder = 2, MinutesFromStart = 3, Direction = RouteDirection.FromMedenRudnik },
             new RouteStop { Id = 288, BusLineId = 8, BusStopId = 14, StopOrder = 3, MinutesFromStart = 5, Direction = RouteDirection.FromMedenRudnik },

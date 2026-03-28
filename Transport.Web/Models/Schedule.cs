@@ -4,6 +4,8 @@ using System.Text;
 
 namespace Transport.Web.Models
 {
+    // Defines a timetable entry for a bus line
+    // Specifies when a bus departs and in which direction
     public class Schedule
     {
         public int Id { get; set; }

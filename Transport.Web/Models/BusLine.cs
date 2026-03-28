@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Transport.Web.Models
 {
+    // Represents a bus line with its route and schedule
     public class BusLine
     {
         public int Id { get; set; }

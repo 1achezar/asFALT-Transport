@@ -6,6 +6,7 @@ using RouteDirection = Transport.Web.Models.RouteDirection;
 
 namespace Transport.Services.DTOs
 {
+    // Contains basic details for a bus route search result
     public class RouteSearchResult
     {
         public string BusLineNumber { get; set; }
