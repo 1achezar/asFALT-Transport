@@ -8,23 +8,34 @@
 }
 
 <h2>asFalt Transport</h2>
+<div style="margin-top:15px; display:flex; flex-wrap:wrap; gap:10px;">
+    @foreach (var line in lines)
+    {
+        <a asp-controller="Transport"
+               asp-action="Stops"
+               asp-route-line="@line"
+               class="line-button">
+            @line
+        </a>
+    }
+</div>
+<style>
+    .line-button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        background-color: #eee;
+        cursor: pointer;
+        text-decoration: none;
+        color: black;
+        display: inline-block;
+    }
 
-<form method="post">
-    <label>Изберете автобусна линия:</label>
-
-    <div style="margin-top:15px; display:flex; flex-wrap:wrap; gap:10px;">
-        @foreach (var line in lines)
-        {
-            <button type="submit"
-                    name="line"
-                    value="@line"
-                    style="padding:10px 20px;
-                border:none;
-                border-radius:8px;
-                background-color:#eee;
-                cursor:pointer;">
-                @line
-            </button>
+        .line-button:hover {
+            background-color: #ddd;
         }
-    </div>
-</form>
+
+        .line-button:active {
+            background-color: #ccc;
+        }
+</style>
