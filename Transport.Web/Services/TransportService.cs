@@ -139,10 +139,5 @@ namespace Transport.Services
 
             return result.Take(count);
         }
-
-        public IEnumerable<string> GetAllStops()
-        {
-            return _context.BusStops.Select(s => s.Name).ToList();
-        }
     }
 }

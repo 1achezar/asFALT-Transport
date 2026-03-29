@@ -19,8 +19,5 @@ namespace Transport.Services
 
         // Returns the next departures from a stop towards a destination, starting from a given time
         IEnumerable<DepartureInfo> GetNextDepartures(string fromStop, string toStop, TimeSpan time, int count);
-        
-        // Returns all stops
-        IEnumerable<string> GetAllStops();
     }
 }
