@@ -1,0 +1,13 @@
+﻿@using Transport.Web.Models
+@model IEnumerable<BusStop>
+
+<h2>Stops for line @ViewBag.Line</h2>
+
+<ul>
+    @foreach (var stop in Model)
+    {
+        <li>@stop.Name</li>
+    }
+</ul>
+
+<a asp-controller="Home" asp-action="Index">⬅ Back</a>
