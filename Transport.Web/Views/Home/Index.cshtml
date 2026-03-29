@@ -4,51 +4,27 @@
 
 @{
     ViewData["Title"] = "asFALT Transport";
-    IEnumerable<RouteSearchResult> routes;
-    if (ViewData["Routes"] != null)
-    {
-        routes = (IEnumerable<RouteSearchResult>)ViewData["Routes"];
-    }
-    else
-    {
-        routes = new List<RouteSearchResult>();
-    }
+    var lines = new List<string> { "Б1", "Б2", "Б11", "Б12", "11", "12", "15", "Н" };
 }
 
 <h2>asFalt Transport</h2>
+
 <form method="post">
-    <label>Изберете начална спирка:</label>
-    <select name="fromStop"></select>
-    <label>Изберете крайна спирка:</label>
-    <select name="toStop"></select>
-    <button type="submit">Търси</button>
-</form>
-@if(routes.Any())
-{
-<h3>Маршрути:</h3>
-<table border="1" style="width:50%">
-    <thead>
-        <tr>
-            <th>Линия</th>
-            <th>Посока</th>
-            <th>Времетраене</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var r in routes)
+    <label>Изберете автобусна линия:</label>
+
+    <div style="margin-top:15px; display:flex; flex-wrap:wrap; gap:10px;">
+        @foreach (var line in lines)
         {
-            <tr>
-                <td>@r.BusLineNumber</td>
-                <td>@r.Direction</td>
-                <td>@r.TravelMinutes</td>
-            </tr>
+            <button type="submit"
+                    name="line"
+                    value="@line"
+                    style="padding:10px 20px;
+                border:none;
+                border-radius:8px;
+                background-color:#eee;
+                cursor:pointer;">
+                @line
+            </button>
         }
-    </tbody>
-</table>
-}
-else
-{
-    <p>Няма намерени маршрути</p>
-}
-
-
+    </div>
+</form>
